@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Environnement virtuel Python
+.venv/
+venv/
+env/
+
+# Variables locales
+.env
+.env.local
+
+# Donnees generees par le scanner
+devices.json
+data/*.json
+
+# Logs
+*.log
+
+# Fichiers systeme
+.DS_Store
+Thumbs.db
+
+# Editeurs
+.vscode/
+.idea/
