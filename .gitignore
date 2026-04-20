@@ -17,6 +17,9 @@ env/
 devices.json
 data/*.json
 
+# Tests
+.pytest_cache/
+
 # Logs
 *.log
 
