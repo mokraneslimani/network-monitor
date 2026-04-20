@@ -104,3 +104,7 @@ async def websocket_devices(websocket: WebSocket):
             await asyncio.sleep(5)
     except WebSocketDisconnect:
         pass
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
