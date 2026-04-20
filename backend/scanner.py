@@ -1,13 +1,35 @@
+import os
 import socket
 
 import nmap
 import ping3
+from dotenv import load_dotenv
 
 
-PORTS_TO_SCAN = [22, 80, 443, 3306, 8080]
+load_dotenv()
+
+
+DEFAULT_PORTS_TO_SCAN = [22, 80, 443, 3306, 8080]
+
+
+def get_ports_to_scan():
+    configured_ports = os.getenv("PORTS_TO_SCAN")
+
+    if not configured_ports:
+        return DEFAULT_PORTS_TO_SCAN
+
+    return [int(port.strip()) for port in configured_ports.split(",") if port.strip()]
+
+
+PORTS_TO_SCAN = get_ports_to_scan()
 
 
 def get_local_network():
+    configured_network = os.getenv("SCAN_NETWORK")
+
+    if configured_network:
+        return configured_network
+
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.connect(("8.8.8.8", 80))
     local_ip = sock.getsockname()[0]

@@ -1,9 +1,19 @@
+import os
 import time
 from datetime import datetime
+
+from dotenv import load_dotenv
 
 from backend.risk import enrich_device
 from backend.scanner import get_all_devices
 from backend.storage import compare_devices, load_devices, save_devices
+
+
+load_dotenv()
+
+
+def get_scan_interval():
+    return int(os.getenv("SCAN_INTERVAL", "60"))
 
 
 def log(message, level="INFO"):
@@ -43,7 +53,7 @@ def main():
 def auto_scan():
     while True:
         main()
-        time.sleep(60)
+        time.sleep(get_scan_interval())
 
 
 if __name__ == "__main__":
